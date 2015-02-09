@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: lessons
+# Table name: quizzes
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -8,5 +8,11 @@
 #  updated_at :datetime         not null
 #
 
-class Lesson < ActiveRecord::Base
+class Quiz < ActiveRecord::Base
+
+
+
+
+
+
 end
