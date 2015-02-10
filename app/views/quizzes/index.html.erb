@@ -1,7 +1,16 @@
-<h1>Hello</h1>
+<h1>Please select a quiz from below</h1>
 
-<% @quizzes.all.each do |quiz| %>
+<div class = "row">
+  <div class ="col-md-6 col-md-offset-3">
 
-    <%= link_to quiz.name, quiz_path(quiz)%>
+    <% @quizzes.all.each do |quiz| %>
 
-<% end %>
+    <h2><%= link_to quiz.name, quiz_path(quiz)%></h2>
+
+
+
+    <% end %>
+
+    </div>
+</div>
+
