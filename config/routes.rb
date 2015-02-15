@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :users, :lesson
   resources :quizzes, only: [:index, :show]
+  resources :entries, only: [:create]
 
 
 end

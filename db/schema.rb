@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150208181440) do
+ActiveRecord::Schema.define(version: 20150215145430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(version: 20150208181440) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "question_id"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "quiz_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "entry_answers", force: :cascade do |t|
+    t.integer "entry_id",  null: false
+    t.integer "answer_id", null: false
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -39,6 +51,11 @@ ActiveRecord::Schema.define(version: 20150208181440) do
 
   create_table "quizzes", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tests", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
