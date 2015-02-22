@@ -12,7 +12,13 @@
 
 FactoryGirl.define do
   factory :answer do
-    
+    question
+    sequence :name do |n|
+      "Answer #{n}"
+    end
+    correct false
+
+
   end
 
 end

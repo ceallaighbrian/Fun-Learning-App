@@ -20,7 +20,7 @@ group :development, :test do
   gem 'sqlite3',     '1.3.9'
   gem 'byebug',      '3.4.0'
   gem 'web-console', '~> 2.0'
-  gem 'spring',      '1.1.3'
+  gem 'spring',      '1.3.2'
   gem 'annotate', '~> 2.6.5'
   gem 'factory_girl_rails'
   gem 'rspec-rails'

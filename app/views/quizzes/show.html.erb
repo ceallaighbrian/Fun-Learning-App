@@ -4,12 +4,13 @@
 <ul class="questions">
 
   <%= form_tag entries_path do %>
+      <%= hidden_field_tag 'quiz_id' , @quiz.id%>
       <% @quiz.questions.each do |questions| %>
           <li>
             <%= questions.name %>
             <ul class="answers" %>
               <% questions.answers.each do |answer| %>
-                  <li> <%= radio_button_tag("answer[#{questions.id}]", answer.id) %>
+                  <li> <%= radio_button_tag("answers[#{questions.id}]", answer.id) %>
                     <%= label(:answer, answer.name) %>
                   </li>
               <% end %>

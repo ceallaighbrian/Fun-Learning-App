@@ -11,4 +11,6 @@ class EntryAnswer < ActiveRecord::Base
   belongs_to :entry
   belongs_to :answer
 
+
+
 end

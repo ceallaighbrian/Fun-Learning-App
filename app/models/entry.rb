@@ -15,4 +15,17 @@ class Entry < ActiveRecord::Base
   belongs_to :quiz
   has_many :entry_answers
 
+  def self.create_entry(quiz_id, params, user)
+
+    entry = user.entries.create(quiz_id: quiz_id)
+
+    params.each do |question_id, answer_id|
+      entry.entry_answers.create!(answer_id: answer_id)
+    end
+
+    entry
+
+
+  end
+
 end

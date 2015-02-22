@@ -1,17 +1,22 @@
 # == Schema Information
 #
-# Table name: entries
+# Table name: questions
 #
 #  id         :integer          not null, primary key
-#  user_id    :integer
+#  name       :string
 #  quiz_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
+
 FactoryGirl.define do
-  factory :entry do
-    
+  factory :question do
+    quiz
+    sequence :name do |n|
+      "Question #{n}"
+    end
+
   end
 
 end
