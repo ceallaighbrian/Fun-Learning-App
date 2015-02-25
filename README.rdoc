@@ -1,12 +1,10 @@
 Ruby on Rails Quiz Application
 
 
-Thiz app allows users to create a profile, take quizs and track their scores, it
+This app allows users to create a profile, take quizs and track their scores, it
 includes gamifaction techniques such as achievements to keep the user playing.
 The app will allow me to explore the Ruby on Rails framework further. Testing is done
 with rspec.
 
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
