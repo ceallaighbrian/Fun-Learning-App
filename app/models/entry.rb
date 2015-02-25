@@ -20,7 +20,7 @@ class Entry < ActiveRecord::Base
     entry = user.entries.create(quiz_id: quiz_id)
 
     params.each do |question_id, answer_id|
-      entry.entry_answers.create!(answer_id: answer_id)
+      entry.entry_answers.create!(answer_id: answer_id, question_id: question_id)
     end
 
     entry

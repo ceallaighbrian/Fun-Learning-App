@@ -203,3 +203,16 @@ input {
     margin-left: 25px;
   }
 }
+
+  .entry {
+    font-size: 16px;
+    list-style: upper-roman;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    > li {
+      margin: 20px 0;
+      padding: 0;
+    }
+  }
+

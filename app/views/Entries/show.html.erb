@@ -1,1 +1,14 @@
-<h1> Hello there </h1>
+<ul class="entry">
+
+  <% @entry.entry_answers.each do |entry_answer| %>
+      <li>
+        <%= entry_answer.question.name %>
+        <% if entry_answer.answer.correct? %>
+            <p>Correct</p>
+        <% else %>
+            <p>Wrong</p>
+        <% end %>
+      </li>
+
+  <% end %>
+</ul>
