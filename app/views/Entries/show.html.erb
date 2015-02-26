@@ -1,14 +1,15 @@
 <ul class="entry">
-
+  <% @entry.score = 0 %>
   <% @entry.entry_answers.each do |entry_answer| %>
       <li>
         <%= entry_answer.question.name %>
         <% if entry_answer.answer.correct? %>
+            <% @entry.score = @entry.score+1 %>
             <p>Correct</p>
         <% else %>
-            <p>Wrong</p>
+            <p>Incorrect</p>
         <% end %>
       </li>
-
   <% end %>
+  <h1>Your Score is <%= @entry.score %></h1>
 </ul>

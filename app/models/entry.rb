@@ -23,6 +23,10 @@ class Entry < ActiveRecord::Base
       entry.entry_answers.create!(answer_id: answer_id, question_id: question_id)
     end
 
+
+
+
+
     entry
 
 
