@@ -13,13 +13,15 @@
 require 'rails_helper'
 
 
-RSpec.describe Entry, type: :model do
+RSpec.describe User, type: :model do
 
   describe 'User Validations' do
 
-    def before
-      @user = User.new(name: "Example Example", email: "user@example.com",
-                       password: "foobar", password_confirmation: "foobar")
+    before do
+
+      @user = FactoryGirl.create(:user)
+
+
     end
 
     it "should be valid" do
@@ -28,69 +30,77 @@ RSpec.describe Entry, type: :model do
 
     it "name should be present" do
       @user.name = "  "
-      assert_not @user.valid?
+      expect(@user).not_to be_valid
     end
 
-    test "email should be present" do
+
+    it "email should be present" do
       @user.email = "   "
-      assert_not @user.valid?
+      expect(@user).not_to be_valid
     end
 
-    test "name should not be too long" do
+    it "name should not be too long" do
       @user.name = "a" * 51
-      assert_not @user.valid?
+      expect(@user).not_to be_valid
     end
 
-    test "email should not be too long" do
+    it "email should not be too long" do
       @user.email = "a" * 244 + "@example.com"
-      assert_not @user.valid?
+      expect(@user).not_to be_valid
     end
 
-    test "email validation should accept valid addresses" do
+    it "email validation should accept valid addresses" do
       valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
                          first.last@foo.jp alice+bob@baz.cn]
       valid_addresses.each do |valid_address|
         @user.email = valid_address
-        assert @user.valid?, "#{valid_address.inspect} should be valid"
+        expect(@user).to be_valid, "#{valid_address.inspect} should be valid"
       end
     end
 
-    test "invalid email should be rejected" do
+
+    it "invalid email should be rejected" do
       invalid_addresses = %w[user@example,com user_at_foo.org user.name@example.
                            foo@bar_baz.com foo@bar+baz.com]
 
       invalid_addresses.each do |invalid|
         @user.email = invalid
-        assert_not @user.valid? "#{invalid.inspect} should be invalid"
+        expect(@user).not_to be_valid, "#{invalid.inspect} should be invalid"
       end
     end
 
-    test "email addresses should be unique" do
+    it "email addresses should be unique" do
       duplicate_user = @user.dup
       duplicate_user.email = @user.email.upcase
       @user.save
-      assert_not duplicate_user.valid?
+      expect(duplicate_user).not_to be_valid
     end
 
-    test "password should have a minimum length" do
+    it "password should have a minimum length" do
       @user.password = @user.password_confirmation = "a" * 5
-      assert_not @user.valid?
+      expect(@user).not_to be_valid
     end
-
-
   end
+
 
   describe 'quiz attempts' do
     before do
+      @quiz = FactoryGirl.create(:quiz)
+      @user = FactoryGirl.create(:user)
+      @entry1 = FactoryGirl.create(:entry, quiz: @quiz, user: @user)
+      @entry2 = FactoryGirl.create(:entry, quiz: @quiz, user: @user)
 
     end
 
     it 'should return a map with quiz names and attempts' do
+        attempts = {Quiz.name => Entry.count}
 
+        expect(attempts).to have_key(Quiz.name)
+        expect(attempts).to have_value(2)
     end
 
   end
 
 
-
 end
+

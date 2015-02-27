@@ -9,23 +9,25 @@
 #  updated_at :datetime         not null
 #
 
-require 'test_helper'
 
-class QuestionTest < ActiveSupport::TestCase
-  test "Create question" do
+require 'rails_helper'
+
+
+RSpec.describe Question, type: :model do
+
+
+  it "Create question" do
     Question.create(name: 'What is the capital of Ireland')
-    assert Question.all.count > 1
+    expect(Question.all.count).to  eq(1)
   end
 
-  test 'Create a question with and an answer' do
+  it 'Create a question with and an answer' do
 
     question = Question.create(name: 'What is the capital of Ireland')
     question.answers.create(name: 'Cork', correct: 'false')
     puts Question.all.count
-    assert Question.all.count == 1
-    assert Answer.all.count == 1
-
-
+    expect(Question.all.count).to  eq(1)
+    expect(Answer.all.count).to  eq(1)
   end
 
 

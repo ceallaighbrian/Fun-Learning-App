@@ -33,9 +33,11 @@ class User < ActiveRecord::Base
   def quiz_attempts
 
 
-
-
-
+    hash = {}
+    Quiz.all.each do |q|
+    hash["#{q.name}"] = self.entries.where("quiz_id = #{q.id}").count
+  end
+    hash
   end
 
 end

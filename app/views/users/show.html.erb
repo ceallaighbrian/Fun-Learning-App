@@ -3,7 +3,11 @@
   <aside class="col-md-4">
     <section class="user-info">
       <h1> <%= @user.name %> </h1>
-      
+      <h3>Quiz Attempts</h3>
+
+      <% @user.quiz_attempts.each do |quiz_name, attempts| %>
+          <h3><%= "#{quiz_name} - #{attempts}" %></h3>
+      <% end %>
 
     </section>
   </aside>
