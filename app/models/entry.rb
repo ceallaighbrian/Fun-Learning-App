@@ -7,6 +7,7 @@
 #  quiz_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  score      :integer
 #
 
 class Entry < ActiveRecord::Base
@@ -23,13 +24,17 @@ class Entry < ActiveRecord::Base
       entry.entry_answers.create!(answer_id: answer_id, question_id: question_id)
     end
 
-
-
-
-
+    entry.update_score
     entry
+  end
 
-
+  def update_score
+    sum = 0;
+    entry_answers.each do |entry_answer|
+      sum += 1 if entry_answer.answer.correct?
+    end
+    self.score = sum
+    save
   end
 
 end

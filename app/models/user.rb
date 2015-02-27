@@ -30,4 +30,12 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end
 
+  def quiz_attempts
+
+
+
+
+
+  end
+
 end
