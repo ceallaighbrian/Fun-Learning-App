@@ -13,9 +13,9 @@
 require 'rails_helper'
 
 
-RSpec.describe User do
+RSpec.describe User, type: :model do
 
-  describe 'User Validations', type: :model do
+  describe 'User Validations' do
 
     before do
       @user = FactoryGirl.create(:user)
@@ -80,23 +80,6 @@ RSpec.describe User do
 
 
   end
-
-  describe 'User Controller', type: :request do
-
-    before do
-      @user = FactoryGirl.create(:user)
-    end
-
-    it "should redirect show when not logged in" do
-      get 'show', id: @user
-      expect(flash[:danger]).to be_valid
-      expect(response).to redirect_to(login_url)
-    end
-
-  end
-
-
-
 
 
   describe 'quiz attempts' do
