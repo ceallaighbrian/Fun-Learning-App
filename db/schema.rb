@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225192057) do
+ActiveRecord::Schema.define(version: 20150310222855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(version: 20150225192057) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "levels", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "required_score"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string   "name"
     t.integer  "quiz_id"
@@ -68,6 +75,8 @@ ActiveRecord::Schema.define(version: 20150225192057) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
+    t.integer  "level_id"
+    t.integer  "score"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

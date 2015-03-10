@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @entries = current_user.entries
+    @entries = @user.entries
   end
 
   def new

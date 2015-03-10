@@ -8,6 +8,8 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  password_digest :string
+#  level_id        :integer
+#  score           :integer
 #
 
 require 'rails_helper'

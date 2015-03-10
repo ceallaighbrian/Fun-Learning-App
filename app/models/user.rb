@@ -8,10 +8,13 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  password_digest :string
+#  level_id        :integer
+#  score           :integer
 #
 
 class User < ActiveRecord::Base
 
+  belongs_to :level
   has_many :entries
 
   before_save { self.email = email.downcase }
@@ -31,11 +34,13 @@ class User < ActiveRecord::Base
   end
 
   def quiz_attempts
+
     hash = {}
     Quiz.all.each do |q|
     hash["#{q.name}"] = self.entries.where("quiz_id = #{q.id}").count
   end
     hash
+
   end
 
 end
