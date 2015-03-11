@@ -11,4 +11,11 @@
 
 class Level < ActiveRecord::Base
   has_many :users
+
+
+  #Check which level score is at
+  def find_level_for_score(score)
+    Level.where(:conditions => ["required_score <= ?", score], :order =>"required_score DESC").first
+  end
+
 end

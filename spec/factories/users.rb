@@ -22,6 +22,7 @@ FactoryGirl.define do
     password_confirmation "lsakdfjalsdkfj"
 
 
+
   end
 
 end
