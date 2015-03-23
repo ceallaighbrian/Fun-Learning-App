@@ -11,6 +11,7 @@ class EntriesController < ApplicationController
   def create
 
     @entry = Entry.create_entry(params[:quiz_id],  params[:answers],  current_user)
+    @user.new_entry(@entry)
     redirect_to @entry
 
   end

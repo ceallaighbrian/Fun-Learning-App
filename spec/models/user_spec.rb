@@ -102,6 +102,22 @@ RSpec.describe User, type: :model do
 
   end
 
+  describe 'update level score' do
+    before do
+      @user = FactoryGirl.create(:user, score: 10)
+      FactoryGirl.create(:level, name: 'Level 2', required_score: 20)
+      FactoryGirl.create(:level, name: 'Level 3', required_score: 30)
+
+    end
+
+    it 'should update the score for a user' do
+      @user.update_score_and_level(15)
+      expect(@user.score).to eq(35)
+      expect(@user.level.name).to eq('Level 3')
+    end
+
+  end
+  
 
 end
 

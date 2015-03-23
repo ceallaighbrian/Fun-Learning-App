@@ -11,8 +11,8 @@
 
 FactoryGirl.define do
   factory :level do
-    name "MyString"
-required_score 1
+    name 'Level 1'
+    required_score 10
   end
 
 end

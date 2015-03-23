@@ -20,7 +20,7 @@ FactoryGirl.define do
     updated_at {1.day.ago}
     password "lsakdfjalsdkfj"
     password_confirmation "lsakdfjalsdkfj"
-
+    score 20
 
 
   end

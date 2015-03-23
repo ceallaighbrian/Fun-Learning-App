@@ -12,7 +12,10 @@
 
 FactoryGirl.define do
   factory :entry do
-    
+    user
+    quiz
+    score 7
+
   end
 
 end

@@ -43,18 +43,21 @@ class User < ActiveRecord::Base
     hash
   end
 
-
-  def update_score_and_level(new_points)
-    new_score = self.score += new_points
-    self.update_attribute(:score, new_score)
-    new_level = Level.find_level_for_score(new_score)
-    if new_level && (!self.level || new_level.id > self.level_id)
-      self.update_attribute(:level_id, new_level.id)
-    end
-  end
-
   def award_sign_up_bonus
     update_score_and_level(10)
   end
+
+  #Check entry and if it is the highest for that quiz, update score
+
+
+  def update_score_and_level(new_points)
+    update_attribute(:score, score + new_points)
+    new_level = Level.find_level_for_score(score + new_points)
+    if new_level && (!level || new_level.id > level_id)
+      update_attribute(:level_id, new_level.id)
+    end
+  end
+
+
 end
 
