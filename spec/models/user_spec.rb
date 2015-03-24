@@ -117,7 +117,44 @@ RSpec.describe User, type: :model do
     end
 
   end
-  
+
+
+  describe 'update entry' do
+    before do
+      @user = FactoryGirl.create(:user, score: 10)
+      @quiz = FactoryGirl.create(:quiz)
+
+    end
+
+    it 'should add the score to a users score if it is the highest' do
+
+      expect(@user.score).to eq(20)
+
+      @entry1 = FactoryGirl.create(:entry, user: @user, quiz: @quiz, score: 7)
+      @user.new_entry(@entry1, 7)
+      expect(@user.score).to eq(27)
+
+      @entry2 = FactoryGirl.create(:entry, user: @user, quiz: @quiz, score: 10)
+      @user.new_entry(@entry2, 7)
+      expect(@user.score).to eq(30)
+    end
+
+    it 'should add the score if its the first entry for that quiz' do
+
+      expect(@user.score).to eq(20)
+
+      @entry1 = FactoryGirl.create(:entry, user: @user, quiz: @quiz, score: 8)
+      @user.new_entry(@entry1)
+      expect(@user.score).to eq(28)
+
+      @entry2 = FactoryGirl.create(:entry, user: @user, quiz: @quiz, score: 5)
+      @user.new_entry(@entry2)
+      expect(@user.score).to eq(28)
+
+    end
+
+  end
+
 
 end
 

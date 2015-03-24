@@ -24,7 +24,9 @@ class Entry < ActiveRecord::Base
       entry.entry_answers.create!(answer_id: answer_id, question_id: question_id)
     end
 
+    highest_score = Entry.where(quiz: id, user: user).order('score desc').first.score
     entry.update_score
+    user.new_entry(entry, highest_score)
     entry
   end
 
@@ -34,6 +36,7 @@ class Entry < ActiveRecord::Base
       sum += 1 if entry_answer.answer.correct?
     end
     self.score = sum
+
     save
   end
 

@@ -20,11 +20,11 @@ class User < ActiveRecord::Base
   after_create :award_sign_up_bonus
 
   before_save { self.email = email.downcase }
-  validates :name, presence: true, length: { maximum: 50}
+  validates :name, presence: true, length: {maximum: 50}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255},
-                    format: {with: VALID_EMAIL_REGEX},
-                    uniqueness: {case_sensitive: false}
+  validates :email, presence: true, length: {maximum: 255},
+            format: {with: VALID_EMAIL_REGEX},
+            uniqueness: {case_sensitive: false}
 
   has_secure_password
   validates :password, length: {minimum: 6}
@@ -38,8 +38,8 @@ class User < ActiveRecord::Base
   def quiz_attempts
     hash = {}
     Quiz.all.each do |q|
-    hash["#{q.name}"] = self.entries.where("quiz_id = #{q.id}").count
-  end
+      hash["#{q.name}"] = self.entries.where("quiz_id = #{q.id}").count
+    end
     hash
   end
 
@@ -48,7 +48,16 @@ class User < ActiveRecord::Base
   end
 
   #Check entry and if it is the highest for that quiz, update score
-
+  def new_entry(entry, highest_score)
+    if Entry.where(quiz: entry.quiz, user: id).count == 1
+      update_attribute(:score, score + entry.score)
+    else
+      if entry.score > highest_score
+        diff = entry.score - highest_score
+        update_attribute(:score, score + diff)
+      end
+    end
+  end
 
   def update_score_and_level(new_points)
     update_attribute(:score, score + new_points)
