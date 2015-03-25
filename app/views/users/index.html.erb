@@ -1,0 +1,26 @@
+<% provide(:title, "Sign up") %>
+<h1>Leaderboard</h1>
+<div class = "row">
+  <div class ="col-md-6 col-md-offset-3">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Position</th>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Score</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @user.sort_by{|u| u.id }.reverse.each do |u| %>
+      <tr>
+        <td><%=u.id %></td>
+        <td><%= link_to "#{u.name}", user_path(u) %></td>
+        <td><%= u.level_id %></td>
+        <td><%= u.score  %></td>
+      </tr>
+          <% end %>
+          </tbody>
+    </table>
+  </div>
+</div>
