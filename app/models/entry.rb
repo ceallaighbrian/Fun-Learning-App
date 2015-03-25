@@ -16,28 +16,28 @@ class Entry < ActiveRecord::Base
   belongs_to :quiz
   has_many :entry_answers
 
+
   def self.create_entry(quiz_id, params, user)
 
-    entry = user.entries.create(quiz_id: quiz_id)
+    max_score = Entry.where(quiz: quiz_id, user: user).maximum(:score)
 
+    entry = user.entries.create(quiz_id: quiz_id)
     params.each do |question_id, answer_id|
       entry.entry_answers.create!(answer_id: answer_id, question_id: question_id)
     end
 
-    highest_score = Entry.where(quiz: id, user: user).order('score desc').first.score
-    entry.update_score
-    user.new_entry(entry, highest_score)
+    entry.calculate_score
+    user.new_entry(entry, max_score)
     entry
   end
 
-  def update_score
+  def calculate_score
     sum = 0;
     entry_answers.each do |entry_answer|
       sum += 1 if entry_answer.answer.correct?
     end
     self.score = sum
-
-    save
+    save!
   end
 
 end

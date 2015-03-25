@@ -104,7 +104,7 @@ RSpec.describe User, type: :model do
 
   describe 'update level score' do
     before do
-      @user = FactoryGirl.create(:user, score: 10)
+      @user = FactoryGirl.create(:user, score: 0)
       FactoryGirl.create(:level, name: 'Level 2', required_score: 20)
       FactoryGirl.create(:level, name: 'Level 3', required_score: 30)
 
@@ -112,8 +112,8 @@ RSpec.describe User, type: :model do
 
     it 'should update the score for a user' do
       @user.update_score_and_level(15)
-      expect(@user.score).to eq(35)
-      expect(@user.level.name).to eq('Level 3')
+      expect(@user.score).to eq(25)
+      expect(@user.level.name).to eq('Level 2')
     end
 
   end
@@ -121,35 +121,35 @@ RSpec.describe User, type: :model do
 
   describe 'update entry' do
     before do
-      @user = FactoryGirl.create(:user, score: 10)
+      @user = FactoryGirl.create(:user, score: 0)
       @quiz = FactoryGirl.create(:quiz)
 
     end
 
     it 'should add the score to a users score if it is the highest' do
 
-      expect(@user.score).to eq(20)
+      expect(@user.score).to eq(10)
 
       @entry1 = FactoryGirl.create(:entry, user: @user, quiz: @quiz, score: 7)
       @user.new_entry(@entry1, 7)
-      expect(@user.score).to eq(27)
+      expect(@user.score).to eq(17)
 
       @entry2 = FactoryGirl.create(:entry, user: @user, quiz: @quiz, score: 10)
       @user.new_entry(@entry2, 7)
-      expect(@user.score).to eq(30)
+      expect(@user.score).to eq(20)
     end
 
     it 'should add the score if its the first entry for that quiz' do
 
-      expect(@user.score).to eq(20)
+      expect(@user.score).to eq(10)
 
       @entry1 = FactoryGirl.create(:entry, user: @user, quiz: @quiz, score: 8)
       @user.new_entry(@entry1)
-      expect(@user.score).to eq(28)
+      expect(@user.score).to eq(18)
 
       @entry2 = FactoryGirl.create(:entry, user: @user, quiz: @quiz, score: 5)
       @user.new_entry(@entry2)
-      expect(@user.score).to eq(28)
+      expect(@user.score).to eq(18)
 
     end
 

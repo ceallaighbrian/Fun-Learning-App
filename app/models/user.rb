@@ -35,33 +35,34 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end
 
-  def quiz_attempts
+  def quiz_scores
     hash = {}
     Quiz.all.each do |q|
-      hash["#{q.name}"] = self.entries.where("quiz_id = #{q.id}").count
+      hash["#{q.name}"] = Entry.where(quiz: q, user: id).maximum(:score)
     end
     hash
   end
 
   def award_sign_up_bonus
-    update_score_and_level(10)
+    update_attribute(:score, 10)
   end
 
   #Check entry and if it is the highest for that quiz, update score
   def new_entry(entry, highest_score)
     if Entry.where(quiz: entry.quiz, user: id).count == 1
-      update_attribute(:score, score + entry.score)
+      update_score_and_level(entry.score)
     else
-      if entry.score > highest_score
+      if entry.score >= highest_score
         diff = entry.score - highest_score
-        update_attribute(:score, score + diff)
+        update_score_and_level(diff)
       end
     end
   end
 
   def update_score_and_level(new_points)
-    update_attribute(:score, score + new_points)
-    new_level = Level.find_level_for_score(score + new_points)
+    new_score = score + new_points
+    update_attribute(:score, new_score)
+    new_level = Level.find_level_for_score(new_score)
     if new_level && (!level || new_level.id > level_id)
       update_attribute(:level_id, new_level.id)
     end

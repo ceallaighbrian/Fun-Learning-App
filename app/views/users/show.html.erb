@@ -3,16 +3,16 @@
   <aside class="col-md-4">
     <section class="user-info">
       <h1> <%= @user.name %> </h1>
-      <h3>Quiz Attempts</h3>
 
-      <% @user.quiz_attempts.each do |quiz_name, attempts| %>
-          <h3><%= "#{quiz_name} - #{attempts}" %></h3>
+      <h3><%= "Level #{@user.level_id} - #{@user.level.name}" %></h3>
+
+      <h3>Your score is <%= @user.score %></h3>
+
+      <h3>Highest Scores</h3>
+
+      <% @user.quiz_scores.each do |quiz_name, score| %>
+          <h3><%= "#{quiz_name} - #{score}" %></h3>
       <% end %>
-
-        <!--<% @entries.each do |entry| %>-->
-          <!--<h3><%= entry.score %></h3>-->
-          <!---->
-      <!--<% end %>-->
 
 
     </section>
