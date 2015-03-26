@@ -10,6 +10,7 @@
 #  password_digest :string
 #  level_id        :integer
 #  score           :integer
+#  last_login      :datetime
 #
 
 class User < ActiveRecord::Base
@@ -47,6 +48,13 @@ class User < ActiveRecord::Base
 
   def award_sign_up_bonus
     update_attribute(:score, 10)
+  end
+
+  def award_login_bonus
+    if last_login <  1.day.ago
+      update_score_and_level(2)
+    end
+    update_attribute(:last_login, Time.now)
   end
 
   #Check entry and if it is the highest for that quiz, update score

@@ -10,6 +10,7 @@
 #  password_digest :string
 #  level_id        :integer
 #  score           :integer
+#  last_login      :datetime
 #
 
 require 'rails_helper'
