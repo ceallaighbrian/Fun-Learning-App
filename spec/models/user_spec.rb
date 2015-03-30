@@ -120,7 +120,7 @@ RSpec.describe User, type: :model do
   end
 
 
-  describe 'update entry' do
+  describe 'updating score with Quiz results' do
     before do
       @user = FactoryGirl.create(:user, score: 0)
       @quiz = FactoryGirl.create(:quiz)
@@ -128,7 +128,6 @@ RSpec.describe User, type: :model do
     end
 
     it 'should add the score to a users score if it is the highest' do
-
       expect(@user.score).to eq(10)
 
       @entry1 = FactoryGirl.create(:entry, user: @user, quiz: @quiz, score: 7)
@@ -141,7 +140,6 @@ RSpec.describe User, type: :model do
     end
 
     it 'should add the score if its the first entry for that quiz' do
-
       expect(@user.score).to eq(10)
 
       @entry1 = FactoryGirl.create(:entry, user: @user, quiz: @quiz, score: 8)
@@ -151,11 +149,21 @@ RSpec.describe User, type: :model do
       @entry2 = FactoryGirl.create(:entry, user: @user, quiz: @quiz, score: 5)
       @user.new_entry(@entry2)
       expect(@user.score).to eq(18)
-
     end
-
   end
 
+
+  describe "Login Bonus" do
+    before do
+      @user = FactoryGirl.create(:user, last_login: "2015-03-25 13:55:41")
+    end
+
+    it 'should add score to the user if they log in' do
+      expect(@user.score).to eq(10)
+      @user.award_login_bonus
+      expect(@user.score).to eq(12)
+    end
+  end
 
 end
 

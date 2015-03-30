@@ -2,9 +2,15 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user-info">
-      <h1> <%= @user.name %> </h1>
+      <h2> <%= @user.name %> </h2>
 
       <h3><%= "Level #{@user.level_id} - #{@user.level.name}" %></h3>
+
+      <h4>Next Levels</h4>
+      <% @user.next_level.each do |level|  %>
+          <h4><%= "#{level.name} -- required score: #{level.required_score}" %></h4>
+          <% end %>
+
 
       <h3>Your score is <%= @user.score %></h3>
 

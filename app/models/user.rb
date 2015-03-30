@@ -53,8 +53,8 @@ class User < ActiveRecord::Base
   def award_login_bonus
     if last_login <  1.day.ago
       update_score_and_level(2)
+      update_attribute(:last_login, Time.now)
     end
-    update_attribute(:last_login, Time.now)
   end
 
   #Check entry and if it is the highest for that quiz, update score
@@ -79,5 +79,13 @@ class User < ActiveRecord::Base
   end
 
 
+  def next_level
+    next_levels = []
+    Level.all.each do |level|
+      next_levels << level unless level.id <= level_id
+    end
+    next_levels
+  end
 end
+
 
