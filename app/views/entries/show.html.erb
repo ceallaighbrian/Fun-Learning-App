@@ -1,0 +1,14 @@
+<ul class="entry">
+
+  <% @entry.entry_answers.each do |entry_answer| %>
+      <li>
+        <%= entry_answer.question.name %>
+        <% if entry_answer.answer.correct? %>
+            <p>Correct</p>
+        <% else %>
+            <p>Incorrect</p>
+        <% end %>
+      </li>
+  <% end %>
+  <h1>Your Score is <%= @entry.score %></h1>
+</ul>
