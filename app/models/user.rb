@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
     if Entry.where(quiz: entry.quiz, user: id).count == 1
       update_score_and_level(entry.score)
       return "Congrats, on your first time taking this quiz your score has increased by #{entry.score}"
-    elsif entry.score >= hiªghest_score
+    elsif entry.score >= highest_score
       diff = entry.score - highest_score
       update_score_and_level(diff)
       return "Congrats, you beat your last score, your score has increased by #{diff}"
