@@ -1,26 +1,35 @@
 <% provide(:title, @user.name) %>
+<div class ="profile">
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user-info">
-      <h2> <%= @user.name %> </h2>
+  <h2> <%= "#{@user.name}'s Profile " %> </h2>
+
+  <div class="col-md-4">
+    <section class="level">
 
       <h3><%= "Level #{@user.level_id} - #{@user.level.name}" %></h3>
 
       <h4>Next Levels</h4>
       <% @user.next_level.each do |level|  %>
           <h4><%= "#{level.name} -- required score: #{level.required_score}" %></h4>
-          <% end %>
-
-
-      <h3>Your score is <%= @user.score %></h3>
-
+      <% end %>
+    </section>
+  </div>
+  <div  class="col-md-4">
+    <section class = "score">
+      <h2>Your score</h2>
+      <h1><%= @user.score %></h1>
+      <h4>Points</h4>
+    </section>
+  </div>
+  <div  class="col-md-4">
+    <section class = "high-scores">
       <h3>Highest Scores</h3>
 
       <% @user.quiz_scores.each do |quiz_name, score| %>
           <h3><%= "#{quiz_name} - #{score}" %></h3>
       <% end %>
-
-
     </section>
-  </aside>
+
+  </div>
+</div>
 </div>

@@ -1,0 +1,4 @@
+<h4>Next Levels</h4>
+<% @user.next_level.each do |level|  %>
+    <h4><%= "#{level.name} -- required score: #{level.required_score}" %></h4>
+<% end %>

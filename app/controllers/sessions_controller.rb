@@ -6,12 +6,13 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       log_in user
-      user.award_login_bonus
+      result = user.award_login_bonus
+      flash[:success] = result unless result.blank?
       redirect_to user
     else
       flash.now[:danger] = 'Invalid login in details'
-    render 'new'
-      end
+      render 'new'
+    end
   end
 
   def destroy

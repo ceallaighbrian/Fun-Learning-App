@@ -16,6 +16,8 @@ class Entry < ActiveRecord::Base
   belongs_to :quiz
   has_many :entry_answers
 
+  attr_accessor :message
+
 
   def self.create_entry(quiz_id, params, user)
 
@@ -27,17 +29,19 @@ class Entry < ActiveRecord::Base
     end
 
     entry.calculate_score
-    user.new_entry(entry, max_score)
+    entry.message = user.new_entry(entry, max_score)
     entry
   end
 
   def calculate_score
-    sum = 0;
+    sum = 0
     entry_answers.each do |entry_answer|
       sum += 1 if entry_answer.answer.correct?
     end
     self.score = sum
     save!
   end
+
+
 
 end
