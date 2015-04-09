@@ -93,6 +93,8 @@ class User < ActiveRecord::Base
     next_levels
   end
 
+
+
 end
 
 

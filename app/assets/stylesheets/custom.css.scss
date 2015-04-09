@@ -36,6 +36,8 @@ textarea {
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
+
+    text-align: center;
 }
 
 h1 {
@@ -222,7 +224,7 @@ input {
   }
 
   .score {
-    height: 300px;
+    height: 200px;
     h1 { color: darkred;
           font-size: 50px;
          letter-spacing: -1px;
@@ -241,5 +243,10 @@ input {
 .level{
 
 }
+
+.level_icon{
+  align-self: center;
+}
+
 
 

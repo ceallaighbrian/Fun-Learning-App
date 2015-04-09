@@ -36,7 +36,7 @@ class Entry < ActiveRecord::Base
   def calculate_score
     sum = 0
     entry_answers.each do |entry_answer|
-      sum += 1 if entry_answer.answer.correct?
+      sum += 5 if entry_answer.answer.correct?
     end
     self.score = sum
     save!
