@@ -185,7 +185,8 @@ input {
 
 .questions {
   font-size: 18px;
-  list-style: upper-roman;
+  white-space: pre-line;
+  list-style: decimal;
   font-weight: bold;
   margin: 0;
   padding: 0;

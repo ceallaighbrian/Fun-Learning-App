@@ -6,6 +6,8 @@
     <%= image_tag "level2.png", class: "img-responsive center-block"  %>
 <% elsif @user.level_id == 3 %>
     <%= image_tag "level3.png", class: "img-responsive center-block"  %>
+<% elsif @user.level_id == 4 %>
+    <%= image_tag "level4.png", class: "img-responsive center-block"  %>
 <% end %>
 <h4>Next Levels</h4>
 <% @user.next_level.each do |level| %>

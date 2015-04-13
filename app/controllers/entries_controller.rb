@@ -10,8 +10,12 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.create_entry(params[:quiz_id],  params[:answers],  current_user)
+    if @entry.present?
     flash[:success] = @entry.message unless @entry.message.blank?
     redirect_to @entry
+    elsif redirect_to current_user
+    end
+
   end
 
 

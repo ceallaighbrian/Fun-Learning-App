@@ -10,5 +10,6 @@
         <% end %>
       </li>
   <% end %>
-  <h1>Your Score is <%= @entry.score %></h1>
+  <h1>Your Result is <%= @entry.score %></h1>
+  <h4><%= link_to "Click here to return to your Profile", current_user %></h4>
 </ul>

@@ -21,6 +21,8 @@ class Entry < ActiveRecord::Base
 
   def self.create_entry(quiz_id, params, user)
 
+  if params.present?
+
     max_score = Entry.where(quiz: quiz_id, user: user).maximum(:score)
 
     entry = user.entries.create(quiz_id: quiz_id)
@@ -31,12 +33,15 @@ class Entry < ActiveRecord::Base
     entry.calculate_score
     entry.message = user.new_entry(entry, max_score)
     entry
+
+    end
+
   end
 
   def calculate_score
     sum = 0
     entry_answers.each do |entry_answer|
-      sum += 5 if entry_answer.answer.correct?
+      sum += 2 if entry_answer.answer.correct?
     end
     self.score = sum
     save!
